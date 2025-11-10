@@ -38,8 +38,6 @@ const DashboardLayout = () => {
     { name: 'Room Matrix', href: '/rooms/matrix', icon: Grid3X3 },
     { name: 'Booked Rooms', href: '/booked-rooms', icon: Users },
     //{ name: 'Checkout', href: '/checkout', icon: LogOut },
-    { name: 'Shop', href: '/shop', icon: ShoppingBag },
-    { name: 'Inventory', href: '/inventory', icon: Package },
     { name: 'Payments', href: '/payments', icon: Receipt },
   ];
 
