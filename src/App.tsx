@@ -44,9 +44,6 @@ function App() {
             <Route path="rooms/edit/:roomId" element={<EditRoom />} />
             <Route path="booked-rooms" element={<BookedRooms />} />
             <Route path="check-in/:roomId" element={<CheckIn />} />
-            <Route path="inventory" element={<Inventory />} />
-            <Route path="inventory/add" element={<AddInventory />} />
-            <Route path="shop" element={<Shop />} />
             <Route path="payments" element={<PaymentLogs />} />
           </Route>
           
