@@ -22,11 +22,13 @@ type AdvanceBooking = {
   room_type: string;
   number_of_rooms: number;
   advance_amount: number;
+  payment_mode?: string;
   rooms: RoomDetail[];
   status: string;
   created_at: any;
   cancelled_at: any;
   refund_amount: number;
+  refund_mode?: string;
 };
 
 const AdvanceBookingsList = () => {
@@ -40,6 +42,7 @@ const AdvanceBookingsList = () => {
     booking: AdvanceBooking | null;
   }>({ show: false, booking: null });
   const [refundAmount, setRefundAmount] = useState('');
+  const [refundMode, setRefundMode] = useState<'cash' | 'gpay'>('cash');
   const [processing, setProcessing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
@@ -96,6 +99,7 @@ const AdvanceBookingsList = () => {
   const handleCancelBooking = (booking: AdvanceBooking) => {
     setCancelModal({ show: true, booking });
     setRefundAmount(booking.advance_amount.toString());
+    setRefundMode(booking.payment_mode === 'gpay' ? 'gpay' : 'cash');
   };
 
   const confirmCancellation = async () => {
@@ -117,25 +121,31 @@ const AdvanceBookingsList = () => {
       await updateDoc(doc(db, 'advance_bookings', cancelModal.booking.id), {
         status: 'cancelled',
         cancelled_at: Timestamp.now(),
-        refund_amount: refund
+        refund_amount: refund,
+        refund_mode: refundMode
       });
 
       if (refund > 0) {
         await addDoc(collection(db, 'payments'), {
           type: 'refund',
           amount: -refund,
+          mode: refundMode,
+          paymentMode: refundMode,
           customer_name: cancelModal.booking.name,
           date_of_booking: cancelModal.booking.date_of_booking,
           rooms: cancelModal.booking.rooms.map(r => r.roomNumber).join(', '),
           note: `Refund for cancelled advance booking - ${cancelModal.booking.name} (${cancelModal.booking.date_of_booking})`,
           timestamp: Timestamp.now(),
-          paymentStatus: 'completed'
+          paymentStatus: 'completed',
+          description: `Refund via ${refundMode}`,
+          roomNumber: cancelModal.booking.rooms.map(r => r.roomNumber).join(', ')
         });
       }
 
       toast.success('Booking cancelled and refund recorded successfully');
       setCancelModal({ show: false, booking: null });
       setRefundAmount('');
+      setRefundMode('cash');
       fetchBookings();
     } catch (error) {
       console.error('Error cancelling booking:', error);
@@ -292,11 +302,11 @@ const AdvanceBookingsList = () => {
                         </div>
                         <div className="text-xs text-green-600 mt-1 flex items-center">
                           <CreditCard className="h-3 w-3 mr-1" />
-                          Advance: ₹{booking.advance_amount.toFixed(2)}
+                          Advance: ₹{booking.advance_amount.toFixed(2)} ({booking.payment_mode || 'cash'})
                         </div>
                         {booking.status === 'cancelled' && booking.refund_amount > 0 && (
                           <div className="text-xs text-red-600 mt-1">
-                            Refunded: ₹{booking.refund_amount.toFixed(2)}
+                            Refunded: ₹{booking.refund_amount.toFixed(2)} ({booking.refund_mode || 'cash'})
                           </div>
                         )}
                       </td>
@@ -407,23 +417,39 @@ const AdvanceBookingsList = () => {
                 </div>
               </div>
 
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Refund Amount (₹) <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  max={cancelModal.booking.advance_amount}
-                  step="0.01"
-                  value={refundAmount}
-                  onChange={(e) => setRefundAmount(e.target.value)}
-                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
-                  placeholder="Enter refund amount"
-                />
-                <p className="mt-1 text-xs text-gray-500">
-                  Maximum refundable: ₹{cancelModal.booking.advance_amount.toFixed(2)}
-                </p>
+              <div className="mb-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Refund Amount (₹) <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    max={cancelModal.booking.advance_amount}
+                    step="0.01"
+                    value={refundAmount}
+                    onChange={(e) => setRefundAmount(e.target.value)}
+                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                    placeholder="Enter refund amount"
+                  />
+                  <p className="mt-1 text-xs text-gray-500">
+                    Maximum refundable: ₹{cancelModal.booking.advance_amount.toFixed(2)}
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Refund Mode <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={refundMode}
+                    onChange={(e) => setRefundMode(e.target.value as 'cash' | 'gpay')}
+                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                  >
+                    <option value="cash">Cash</option>
+                    <option value="gpay">GPay</option>
+                  </select>
+                </div>
               </div>
 
               <div className="flex justify-end space-x-3">

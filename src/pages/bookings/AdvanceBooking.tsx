@@ -35,7 +35,8 @@ const AdvanceBooking = () => {
     dateOfBooking: '',
     roomType: 'NON AC',
     numberOfRooms: 1,
-    advanceAmount: ''
+    advanceAmount: '',
+    paymentMode: 'cash' as 'cash' | 'gpay'
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -166,6 +167,8 @@ const AdvanceBooking = () => {
 
     setLoading(true);
     try {
+      const advanceAmount = parseFloat(formData.advanceAmount);
+
       await addDoc(collection(db, 'advance_bookings'), {
         name: formData.name,
         mobile: formData.mobile,
@@ -173,12 +176,28 @@ const AdvanceBooking = () => {
         date_of_booking: formData.dateOfBooking,
         room_type: formData.roomType,
         number_of_rooms: formData.numberOfRooms,
-        advance_amount: parseFloat(formData.advanceAmount),
+        advance_amount: advanceAmount,
+        payment_mode: formData.paymentMode,
         rooms: selectedRooms,
         status: 'active',
         created_at: Timestamp.now(),
         cancelled_at: null,
         refund_amount: 0
+      });
+
+      await addDoc(collection(db, 'payments'), {
+        type: 'advance',
+        amount: advanceAmount,
+        mode: formData.paymentMode,
+        paymentMode: formData.paymentMode,
+        customer_name: formData.name,
+        date_of_booking: formData.dateOfBooking,
+        rooms: selectedRooms.map(r => r.roomNumber).join(', '),
+        note: `Advance booking payment for ${formData.name} on ${formData.dateOfBooking}`,
+        timestamp: Timestamp.now(),
+        paymentStatus: 'completed',
+        description: `Advance payment for ${formData.numberOfRooms} room(s)`,
+        roomNumber: selectedRooms.map(r => r.roomNumber).join(', ')
       });
 
       toast.success('Advance booking created successfully!');
@@ -290,7 +309,7 @@ const AdvanceBooking = () => {
                   />
                 </div>
 
-                <div className="md:col-span-2">
+                <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Advance Amount (₹) <span className="text-red-500">*</span>
                   </label>
@@ -305,6 +324,22 @@ const AdvanceBooking = () => {
                     placeholder="Enter advance amount"
                     required
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Payment Mode <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    name="paymentMode"
+                    value={formData.paymentMode}
+                    onChange={handleChange}
+                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    required
+                  >
+                    <option value="cash">Cash</option>
+                    <option value="gpay">GPay</option>
+                  </select>
                 </div>
               </div>
 
