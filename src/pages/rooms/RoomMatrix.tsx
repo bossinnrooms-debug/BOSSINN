@@ -216,13 +216,10 @@ const RoomMatrix = () => {
         const payments = paymentsResults[index].docs.map(doc => doc.data());
         const purchases = purchasesResults[index].docs.map(doc => doc.data());
 
+        // Start with the base rent (which already includes extensions due to increment)
         let totalRent = booking.rent;
-        payments.forEach(p => {
-          if (p.type === 'extension') {
-            totalRent += p.amount;
-          }
-        });
 
+        // Add shop purchases only (not extensions since they're already in booking.rent)
         const shopTotal = purchases.reduce((sum, p) => sum + (p.amount || 0), 0);
         totalRent += shopTotal;
 
@@ -289,12 +286,9 @@ const RoomMatrix = () => {
       const shopPurchasesData = await ShopPurchaseService.getPurchasesByCheckin(bookingId);
       setShopPurchases(shopPurchasesData as ShopPurchase[]);
 
+      // Use the same calculation as calculatePendingAmounts
+      // booking.rent already includes extension amounts (due to increment operation)
       let totalRent = booking.rent;
-      history.forEach(p => {
-        if (p.type === 'extension') {
-          totalRent += p.amount;
-        }
-      });
 
       const shopTotal = (shopPurchasesData as ShopPurchase[]).reduce((sum, p) => sum + (p.amount || 0), 0);
       totalRent += shopTotal;
@@ -303,7 +297,10 @@ const RoomMatrix = () => {
       const calculatedPending = Math.max(0, totalRent - totalPaid);
       setPendingAmounts(prev => ({ ...prev, [bookingId]: calculatedPending }));
 
-      const initialRent = booking.rent - getExtensionPaymentsTotal(history);
+      // For display purposes, calculate the initial rent (base rent without extensions)
+      const extensionsTotal = getExtensionPaymentsTotal(history);
+      const initialRent = booking.rent - extensionsTotal;
+
       const rentEntry: PaymentEntry = {
         id: 'rent-entry',
         amount: initialRent,
