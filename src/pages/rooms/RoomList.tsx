@@ -6,22 +6,7 @@ import { Plus, Pencil, Trash, LogIn, UserCheck, Loader, BadgeDollarSign, BedDoub
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 
-type Room = {
-  id: string;
-  roomNumber: number;
-  floor: string;
-  type: string;
-  status: 'available' | 'occupied' | 'cleaning' | 'maintenance' | 'extension';
-  hasPendingPayment?: boolean;
-};
-
-type ConfirmModal = {
-  show: boolean;
-  roomId: string | null;
-  action: 'delete' | 'status' | 'payment' | null;
-  newStatus?: string;
-  newPaymentStatus?: boolean;
-};
+// Room and Modal Types
 
 const RoomList = () => {
   const [rooms, setRooms] = useState<Room[]>([]);
