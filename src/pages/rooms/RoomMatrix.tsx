@@ -773,7 +773,6 @@ const RoomMatrix = () => {
                           {pendingAmounts[booking.id] > 0 && (
                             <div className="mt-1 text-xs font-semibold text-red-600">
                               Pending: ₹{Math.max(0, pendingAmounts[booking.id])}
-                              <strong>Pending:</strong> ₹{Math.max(0, getTotalRentSoFar(pendingAmounts[booking.id]) - getTotalPaidSoFar(pendingAmounts[booking.id]))}
 
                             </div>
                           )}
@@ -787,7 +786,7 @@ const RoomMatrix = () => {
                             if (booking && pendingAmounts[booking.id] > 0) {
                               return (
                                 <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center"
-                                     title={`Pending: ₹${Math.max(0, getTotalRentSoFar(pendingAmounts[booking.id]) - getTotalPaidSoFar(pendingAmounts[booking.id]))}`}>
+                                     title={`Pending: ₹${pendingAmounts[booking.id].toFixed(0)}`}>
                                   <span className="text-white text-xs">₹</span>
                                 </div>
                               );
