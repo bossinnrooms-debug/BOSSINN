@@ -107,7 +107,7 @@ const CheckIn: React.FC = () => {
               name="guestName"
               value={formData.guestName}
               onChange={handleChange}
-              className="w-full rounded-md border-gray-300 shadow-sm uppercase"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm uppercase"
               placeholder="Enter guest name"
               required
             />
@@ -124,7 +124,7 @@ const CheckIn: React.FC = () => {
               value={formData.phoneNumber}
               onChange={handleChange}
               onWheel={(e) => e.currentTarget.blur()}
-              className="w-full rounded-md border-gray-300 shadow-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
               placeholder="Enter phone number"
               required
             />
@@ -140,7 +140,7 @@ const CheckIn: React.FC = () => {
               name="idNumber"
               value={formData.idNumber}
               onChange={handleChange}
-              className="w-full rounded-md border-gray-300 shadow-sm uppercase"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm uppercase"
               placeholder="Enter ID number"
               required
             />
@@ -158,7 +158,7 @@ const CheckIn: React.FC = () => {
               value={formData.numberOfGuests}
               onChange={handleChange}
               onWheel={(e) => e.currentTarget.blur()}
-              className="w-full rounded-md border-gray-300 shadow-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
             />
           </div>
 
@@ -204,7 +204,7 @@ const CheckIn: React.FC = () => {
               value={formData.rent}
               onChange={handleChange}
               onWheel={(e) => e.currentTarget.blur()}
-              className="w-full rounded-md border-gray-300 shadow-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
               placeholder="Enter rent amount"
               required
             />
@@ -221,7 +221,7 @@ const CheckIn: React.FC = () => {
               value={formData.initialPayment}
               onChange={handleChange}
               onWheel={(e) => e.currentTarget.blur()}
-              className="w-full rounded-md border-gray-300 shadow-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
               placeholder="Enter initial payment amount"
               required
             />

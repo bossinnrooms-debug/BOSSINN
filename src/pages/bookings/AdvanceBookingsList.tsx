@@ -706,7 +706,7 @@ const AdvanceBookingsList = () => {
                     step="0.01"
                     value={refundAmount}
                     onChange={(e) => setRefundAmount(e.target.value)}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-red-500 focus:ring-red-500"
                     placeholder="Enter refund amount"
                   />
                   <p className="mt-1 text-xs text-gray-500">
@@ -721,7 +721,7 @@ const AdvanceBookingsList = () => {
                   <select
                     value={refundMode}
                     onChange={(e) => setRefundMode(e.target.value as 'cash' | 'gpay')}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-red-500 focus:ring-red-500"
                   >
                     <option value="cash">Cash</option>
                     <option value="gpay">GPay</option>

@@ -51,7 +51,7 @@ const AddInventory = () => {
           <input
             type="text"
             {...register('itemName', { required: 'Item name is required' })}
-            className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
           {errors.itemName && (
             <p className="mt-1 text-sm text-red-600">{errors.itemName.message}</p>
@@ -65,7 +65,7 @@ const AddInventory = () => {
             </label>
             <select
               {...register('category', { required: 'Category is required' })}
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
             >
               <option value="">Select a category</option>
               <option value="Toiletries">Toiletries</option>
@@ -94,7 +94,7 @@ const AddInventory = () => {
                   message: 'Quantity cannot be negative'
                 }
               })}
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
             {errors.quantity && (
               <p className="mt-1 text-sm text-red-600">{errors.quantity.message}</p>
@@ -115,7 +115,7 @@ const AddInventory = () => {
                   message: 'Price cannot be negative'
                 }
               })}
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
             {errors.unitPrice && (
               <p className="mt-1 text-sm text-red-600">{errors.unitPrice.message}</p>
@@ -135,7 +135,7 @@ const AddInventory = () => {
                   message: 'Minimum stock level cannot be negative'
                 }
               })}
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
             {errors.minStockLevel && (
               <p className="mt-1 text-sm text-red-600">{errors.minStockLevel.message}</p>
@@ -150,7 +150,7 @@ const AddInventory = () => {
           <textarea
             rows={3}
             {...register('description')}
-            className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
         

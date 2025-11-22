@@ -809,7 +809,7 @@ const HousePage = () => {
                     type="text"
                     value={checkInForm.guestName}
                     onChange={(e) => setCheckInForm({ ...checkInForm, guestName: e.target.value.toUpperCase() })}
-                    className="w-full rounded-md border-gray-300 shadow-sm uppercase"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm uppercase"
                     required
                   />
                 </div>
@@ -822,7 +822,7 @@ const HousePage = () => {
                     type="tel"
                     value={checkInForm.phoneNumber}
                     onChange={(e) => setCheckInForm({ ...checkInForm, phoneNumber: e.target.value })}
-                    className="w-full rounded-md border-gray-300 shadow-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                     required
                   />
                 </div>
@@ -835,7 +835,7 @@ const HousePage = () => {
                     type="text"
                     value={checkInForm.idNumber}
                     onChange={(e) => setCheckInForm({ ...checkInForm, idNumber: e.target.value.toUpperCase() })}
-                    className="w-full rounded-md border-gray-300 shadow-sm uppercase"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm uppercase"
                     required
                   />
                 </div>
@@ -850,7 +850,7 @@ const HousePage = () => {
                     value={checkInForm.numberOfGuests}
                     onChange={(e) => setCheckInForm({ ...checkInForm, numberOfGuests: parseInt(e.target.value) })}
                     onWheel={(e) => e.currentTarget.blur()}
-                    className="w-full rounded-md border-gray-300 shadow-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                   />
                 </div>
 
@@ -911,7 +911,7 @@ const HousePage = () => {
                       value={checkInForm.daysOfStay}
                       onChange={(e) => setCheckInForm({ ...checkInForm, daysOfStay: parseInt(e.target.value) })}
                       onWheel={(e) => e.currentTarget.blur()}
-                      className="w-full rounded-md border-gray-300 shadow-sm mt-2"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm mt-2"
                       placeholder="Enter number of days"
                     />
                   )}
@@ -928,7 +928,7 @@ const HousePage = () => {
                     value={checkInForm.rent}
                     onChange={(e) => setCheckInForm({ ...checkInForm, rent: e.target.value })}
                     onWheel={(e) => e.currentTarget.blur()}
-                    className="w-full rounded-md border-gray-300 shadow-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                     required
                   />
                 </div>
@@ -944,7 +944,7 @@ const HousePage = () => {
                     value={checkInForm.initialPayment}
                     onChange={(e) => setCheckInForm({ ...checkInForm, initialPayment: e.target.value })}
                     onWheel={(e) => e.currentTarget.blur()}
-                    className="w-full rounded-md border-gray-300 shadow-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                     required
                   />
                 </div>
@@ -1093,7 +1093,7 @@ const HousePage = () => {
                   value={extendForm.additionalDays}
                   onChange={(e) => setExtendForm({ ...extendForm, additionalDays: parseInt(e.target.value) })}
                   onWheel={(e) => e.currentTarget.blur()}
-                  className="w-full rounded-md border-gray-300 shadow-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                   required
                 />
               </div>
@@ -1109,7 +1109,7 @@ const HousePage = () => {
                   value={extendForm.rentForDays}
                   onChange={(e) => setExtendForm({ ...extendForm, rentForDays: e.target.value })}
                   onWheel={(e) => e.currentTarget.blur()}
-                  className="w-full rounded-md border-gray-300 shadow-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                   required
                 />
               </div>
@@ -1155,7 +1155,7 @@ const HousePage = () => {
                   type="text"
                   value={extraFeeForm.description}
                   onChange={(e) => setExtraFeeForm({ ...extraFeeForm, description: e.target.value.toUpperCase() })}
-                  className="w-full rounded-md border-gray-300 shadow-sm uppercase"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm uppercase"
                   placeholder="e.g., ELECTRICITY BILL, DAMAGE CHARGES"
                   required
                 />
@@ -1172,7 +1172,7 @@ const HousePage = () => {
                   value={extraFeeForm.amount}
                   onChange={(e) => setExtraFeeForm({ ...extraFeeForm, amount: e.target.value })}
                   onWheel={(e) => e.currentTarget.blur()}
-                  className="w-full rounded-md border-gray-300 shadow-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                   required
                 />
               </div>
@@ -1221,7 +1221,7 @@ const HousePage = () => {
                   value={paymentAmount}
                   onChange={(e) => setPaymentAmount(e.target.value)}
                   onWheel={(e) => e.currentTarget.blur()}
-                  className="w-full rounded-md border-gray-300 shadow-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                   required
                 />
               </div>

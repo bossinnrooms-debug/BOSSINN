@@ -115,7 +115,7 @@ const AdvanceBooking = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Enter guest name"
                     required
                   />
@@ -130,7 +130,7 @@ const AdvanceBooking = () => {
                     name="mobile"
                     value={formData.mobile}
                     onChange={handleChange}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Enter mobile number"
                     pattern="[0-9]{10}"
                     required
@@ -146,7 +146,7 @@ const AdvanceBooking = () => {
                     name="aadhar"
                     value={formData.aadhar}
                     onChange={handleChange}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Enter Aadhar number"
                     required
                   />
@@ -162,7 +162,7 @@ const AdvanceBooking = () => {
                     value={formData.dateOfBooking}
                     onChange={handleChange}
                     min={new Date().toISOString().split('T')[0]}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
                 </div>
@@ -175,7 +175,7 @@ const AdvanceBooking = () => {
                     name="roomType"
                     value={formData.roomType}
                     onChange={handleChange}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   >
                     <option value="NON AC">Non-AC</option>
                     <option value="AC">AC</option>
@@ -192,7 +192,7 @@ const AdvanceBooking = () => {
                     min="1"
                     value={formData.numberOfRooms}
                     onChange={handleChange}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
                 </div>
@@ -208,7 +208,7 @@ const AdvanceBooking = () => {
                     step="0.01"
                     value={formData.pricePerRoom}
                     onChange={handleChange}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Enter price per room"
                     required
                   />
@@ -225,7 +225,7 @@ const AdvanceBooking = () => {
                     step="0.01"
                     value={formData.advanceAmount}
                     onChange={handleChange}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Enter advance amount"
                     required
                   />
@@ -239,7 +239,7 @@ const AdvanceBooking = () => {
                     name="paymentMode"
                     value={formData.paymentMode}
                     onChange={handleChange}
-                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   >
                     <option value="cash">Cash</option>
