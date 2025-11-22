@@ -55,7 +55,7 @@ const PaymentsPage: React.FC = () => {
             paymentStatus: 'completed',
             customerName: checkinData.guestName || 'Guest',
             roomNumber: checkinData.roomNumber || 'N/A',
-            description: `${payData.type === 'extension' ? 'Stay extension' : payData.type === 'initial' ? 'Initial payment' : 'Additional payment'}`,
+            description: `${ payData.type === 'initial' ? 'Initial payment' : 'Additional payment'}`,
             paymentMode: payData.mode,
             mode: payData.mode
           };
