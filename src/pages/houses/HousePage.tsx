@@ -125,13 +125,46 @@ const HousePage = () => {
         return bTime.getTime() - aTime.getTime();
       });
 
-      setBookings(activeList);
+      // Recalculate pending amounts for all active bookings
+      const activeWithPending = await Promise.all(
+        activeList.map(async (booking) => {
+          const pending = await calculatePendingAmount(booking);
+          return { ...booking, pendingAmount: pending };
+        })
+      );
+
+      setBookings(activeWithPending);
       setHistoricalBookings(historicalList);
     } catch (error) {
       console.error('Error fetching bookings:', error);
       toast.error('Failed to fetch bookings');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const calculatePendingAmount = async (booking: HouseBooking): Promise<number> => {
+    try {
+      // Fetch all payment entries
+      const paymentRef = collection(db, 'house_bookings', booking.id, 'payments');
+      const snapshot = await getDocs(paymentRef);
+      const payments = snapshot.docs.map(doc => doc.data()) as PaymentEntry[];
+
+      // Calculate total rent (extensions + fees are already in booking.rent)
+      const totalRent = booking.rent;
+
+      // Calculate total paid (cash + gpay payments only)
+      const totalPaid = payments
+        .filter(entry =>
+          (entry.type === 'initial' || entry.type === 'advance') &&
+          (entry.mode === 'cash' || entry.mode === 'gpay')
+        )
+        .reduce((sum, entry) => sum + entry.amount, 0);
+
+      return Math.max(0, totalRent - totalPaid);
+    } catch (error) {
+      console.error('Error calculating pending amount:', error);
+      return 0;
     }
   };
 
@@ -180,9 +213,19 @@ const HousePage = () => {
         ...doc.data()
       })) as PaymentEntry[];
 
+      // Calculate the BASE rent (initial rent without extensions/fees)
+      const extensionTotal = history
+        .filter(entry => entry.type === 'extension')
+        .reduce((sum, entry) => sum + entry.amount, 0);
+      const extraFeesTotal = history
+        .filter(entry => entry.type === 'extra-fee')
+        .reduce((sum, entry) => sum + entry.amount, 0);
+
+      const baseRent = booking.rent - extensionTotal - extraFeesTotal;
+
       const rentEntry: PaymentEntry = {
         id: 'rent-entry',
-        amount: booking.rent,
+        amount: baseRent,
         mode: 'n/a',
         type: 'Rent',
         timestamp: booking.checkedInAt || Timestamp.now(),
@@ -562,7 +605,7 @@ const HousePage = () => {
                             Until: {new Date(booking.checkOutDate.toDate()).toLocaleDateString('en-IN')}
                           </span>
                         </div>
-                        {booking.pendingAmount > 0 && (
+                        {booking.pendingAmount !== undefined && booking.pendingAmount > 0 && (
                           <div className="flex items-center text-red-600 font-semibold">
                             <DollarSign className="h-4 w-4 mr-2" />
                             <span>Pending: ₹{booking.pendingAmount.toFixed(2)}</span>
