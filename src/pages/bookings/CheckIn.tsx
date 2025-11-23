@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { collection, addDoc, Timestamp, doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { toast } from 'react-toastify';
+import { preventNumberInputScroll } from '../../utils/formatters';
 
 const CheckIn: React.FC = () => {
   const { roomId } = useParams();

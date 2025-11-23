@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase/config';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import { preventNumberInputScroll } from '../../utils/formatters';
 
 const AdvanceBooking = () => {
   const navigate = useNavigate();

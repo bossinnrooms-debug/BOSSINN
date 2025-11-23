@@ -4,6 +4,7 @@ import { db } from '../../firebase/config';
 import { collection, addDoc } from 'firebase/firestore';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { preventNumberInputScroll } from '../../utils/formatters';
 
 type InventoryFormData = {
   itemName: string;
@@ -87,7 +88,8 @@ const AddInventory = () => {
             </label>
             <input
               type="number"
-              {...register('quantity', { 
+              onWheel={preventNumberInputScroll}
+              {...register('quantity', {
                 required: 'Quantity is required',
                 min: {
                   value: 0,
@@ -108,7 +110,8 @@ const AddInventory = () => {
             <input
               type="number"
               step="0.01"
-              {...register('unitPrice', { 
+              onWheel={preventNumberInputScroll}
+              {...register('unitPrice', {
                 required: 'Unit price is required',
                 min: {
                   value: 0,
@@ -128,7 +131,8 @@ const AddInventory = () => {
             </label>
             <input
               type="number"
-              {...register('minStockLevel', { 
+              onWheel={preventNumberInputScroll}
+              {...register('minStockLevel', {
                 required: 'Minimum stock level is required',
                 min: {
                   value: 0,

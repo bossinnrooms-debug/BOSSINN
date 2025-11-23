@@ -5,6 +5,7 @@ import { db } from '../../firebase/config';
 import { collection, getDocs, query, where, addDoc, Timestamp, doc, updateDoc, increment, orderBy } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
+import { preventNumberInputScroll } from '../../utils/formatters';
 
 type House = {
   id: string;

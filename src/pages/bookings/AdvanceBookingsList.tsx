@@ -5,6 +5,7 @@ import { collection, getDocs, doc, updateDoc, addDoc, Timestamp, query, where, o
 import { Plus, Calendar, Phone, CreditCard, XCircle, Search, Check, History, Users, X } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
+import { preventNumberInputScroll } from '../../utils/formatters';
 
 type Room = {
   id: string;
@@ -697,6 +698,7 @@ const AdvanceBookingsList = () => {
                     step="0.01"
                     value={refundAmount}
                     onChange={(e) => setRefundAmount(e.target.value)}
+                    onWheel={preventNumberInputScroll}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-red-500 focus:ring-red-500"
                     placeholder="Enter refund amount"
                   />

@@ -29,3 +29,7 @@ export const formatCurrency = (amount: number): string => {
     maximumFractionDigits: 0
   }).format(amount);
 };
+
+export const preventNumberInputScroll = (e: React.WheelEvent<HTMLInputElement>) => {
+  e.currentTarget.blur();
+};

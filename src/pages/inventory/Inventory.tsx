@@ -4,6 +4,7 @@ import { db } from '../../firebase/config';
 import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { Package, Plus, Pencil, Trash, AlertTriangle } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { preventNumberInputScroll } from '../../utils/formatters';
 
 type InventoryItem = {
   id: string;
@@ -270,6 +271,7 @@ const Inventory = () => {
                             ...updateQuantity,
                             [item.id]: parseInt(e.target.value) || 0
                           })}
+                          onWheel={preventNumberInputScroll}
                           className="w-16 h-8 text-xs rounded border-gray-300"
                         />
                         <button
