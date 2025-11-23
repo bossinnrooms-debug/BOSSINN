@@ -13,7 +13,7 @@ const firebaseConfig = {
     measurementId: "G-QYYJ63MC31"
   };
 
-TESTING
+// TESTING
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAIxrA5uo64FQOq_RP1GnG8sNhhXJBaX2E",
 //   authDomain: "boss-test-3d2f8.firebaseapp.com",
