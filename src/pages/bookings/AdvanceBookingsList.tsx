@@ -177,15 +177,6 @@ const AdvanceBookingsList = () => {
           advanceBookingId: booking.id
         });
 
-        // Add initial payment entry
-        await addDoc(collection(db, 'checkins', checkinRef.id, 'payments'), {
-          amount: booking.advance_amount / selectedRooms.length,
-          mode: booking.payment_mode || 'cash',
-          type: 'initial',
-          timestamp: Timestamp.now(),
-          description: 'Initial payment from advance booking'
-        });
-
         // Update room status to occupied
         await updateDoc(doc(db, 'rooms', room.id), {
           status: 'occupied'

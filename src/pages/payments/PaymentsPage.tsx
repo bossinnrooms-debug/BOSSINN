@@ -59,7 +59,7 @@ const PaymentsPage: React.FC = () => {
             paymentMode: payData.mode,
             mode: payData.mode
           };
-        });
+        }).filter(payment => payment.type !== 'extension');
 
         paymentRecords.push(...additionalPayments);
       }

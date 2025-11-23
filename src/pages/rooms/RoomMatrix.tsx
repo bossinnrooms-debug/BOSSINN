@@ -757,7 +757,7 @@ const RoomMatrix = () => {
                         {getStatusIcon(room.status)}
                       </div>
                       <div className="font-bold text-lg">{room.roomNumber}</div>
-                      <div className="text-xs uppercase">{room.type}</div>
+                      <div className="text-xs uppercase">{room.status === 'occupied' && booking ? booking.acType || room.type : room.type}</div>
 
                       {room.status === 'occupied' && booking && (
                         <>
