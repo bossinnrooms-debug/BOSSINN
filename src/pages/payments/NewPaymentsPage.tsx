@@ -81,21 +81,23 @@ const NewPaymentsPage: React.FC = () => {
         const checkinData = checkinDoc.data();
         const paymentsSnapshot = paymentsSnapshots[index];
 
-        const additionalPayments = paymentsSnapshot.docs.map((payDoc) => {
-          const payData = payDoc.data();
-          return {
-            id: payDoc.id,
-            amount: payData.amount,
-            timestamp: payData.timestamp?.toDate() || new Date(),
-            type: payData.type || 'additional',
-            paymentStatus: 'completed',
-            customerName: checkinData.guestName || 'Guest',
-            roomNumber: checkinData.roomNumber || 'N/A',
-            description: `${payData.type === 'extension' ? 'Stay extension' :  payData.type === 'initial' ? 'Initial payment' : 'Additional payment'}`,
-            paymentMode: payData.mode,
-            mode: payData.mode
-          };
-        });
+        const additionalPayments = paymentsSnapshot.docs
+          .map((payDoc) => {
+            const payData = payDoc.data();
+            return {
+              id: payDoc.id,
+              amount: payData.amount,
+              timestamp: payData.timestamp?.toDate() || new Date(),
+              type: payData.type || 'additional',
+              paymentStatus: 'completed',
+              customerName: checkinData.guestName || 'Guest',
+              roomNumber: checkinData.roomNumber || 'N/A',
+              description: `${payData.type === 'extension' ? 'Stay extension' :  payData.type === 'initial' ? 'Initial payment' : 'Additional payment'}`,
+              paymentMode: payData.mode,
+              mode: payData.mode
+            };
+          })
+          .filter(payment => payment.type !== 'extension'); // Filter out extension payments
 
         paymentRecords.push(...additionalPayments);
       });
