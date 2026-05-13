@@ -100,10 +100,6 @@ const Login = () => {
               </div>
             </form>
           </div>
-          
-          <div className="px-8 py-4 bg-gray-50 border-t border-gray-100 text-center text-xs text-gray-500">
-            For demo purposes, use admin@bossinn.com / password123
-          </div>
         </div>
       </div>
     </div>
