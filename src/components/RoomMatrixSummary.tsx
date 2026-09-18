@@ -63,7 +63,7 @@ const RoomMatrixSummary = () => {
         else if (status === 'maintenance') roomStatuses.maintenance++;
       });
 
-      const totalHouses = 4;
+      const totalHouses = 6;
       const bookedHouses = houseBookingsSnapshot.docs.length;
       const availableHouses = totalHouses - bookedHouses;
 
