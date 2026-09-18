@@ -19,7 +19,7 @@ const RoomMatrixSummary = () => {
     availableRooms: 0,
     occupiedRooms: 0,
     cleaningRooms: 0,
-    totalHouses: 4,
+    totalHouses: 6,
     availableHouses: 0,
     bookedHouses: 0,
   });
