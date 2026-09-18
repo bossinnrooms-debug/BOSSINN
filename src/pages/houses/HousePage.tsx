@@ -57,6 +57,8 @@ const HOUSES = [
   { id: 'white-house-first', name: 'White House - First Floor', type: 'house' as const },
   { id: 'white-house-second', name: 'White House - Second Floor', type: 'house' as const },
   { id: 'guest-house', name: 'Guest House', type: 'house' as const },
+  { id: 'new-house-front', name: 'New House - Front', type: 'house' as const },
+  { id: 'new-house-side', name: 'New House - Side', type: 'house' as const },
 ];
 
 const HousePage = () => {
